@@ -695,7 +695,7 @@ public class ReactViewGroup extends ViewGroup
     }
   }
 
-  /*package*/ void removeViewWithSubviewClippingEnabled(View view) {
+  /*package*/ void removeViewWithSubviewClippingEnabled(View view, boolean viewRemovedFromParent) {
     UiThreadUtil.assertOnUiThread();
 
     Assertions.assertCondition(mRemoveClippedSubviews);
@@ -703,7 +703,7 @@ public class ReactViewGroup extends ViewGroup
     Assertions.assertNotNull(mAllChildren);
     view.removeOnLayoutChangeListener(mChildrenLayoutChangeListener);
     int index = indexOfChildInAllChildren(view);
-    if (mAllChildren[index].getParent() != null) {
+    if (!viewRemovedFromParent && mAllChildren[index].getParent() != null) {
       int clippedSoFar = 0;
       for (int i = 0; i < index; i++) {
         if (mAllChildren[i].getParent() == null) {

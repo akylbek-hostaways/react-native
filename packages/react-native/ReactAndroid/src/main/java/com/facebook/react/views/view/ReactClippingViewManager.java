@@ -74,7 +74,7 @@ public abstract class ReactClippingViewManager<T extends ReactViewGroup>
         if (child.getParent() != null) {
           parent.removeView(child);
         }
-        parent.removeViewWithSubviewClippingEnabled(child);
+        parent.removeViewWithSubviewClippingEnabled(child, true);
       }
     } else {
       parent.removeViewAt(index);
